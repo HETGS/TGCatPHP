@@ -198,7 +198,7 @@ function processObsidTableHeaderHTML( $data )
   $qid = $idata[0]; 
   print "
 <tr id='obsidHeader'>
-<th><a name='togS' href='#'>+/-</a></th>
+<th><a name='togS' href='#'><font color='E1D7B0'>+/-</font></a></th>
 <th>Links</th>";
   //
   // loop through the available keys
@@ -281,7 +281,7 @@ function processSourceTableHeaderHTML( $data )
   $qid = $idata[0];
   print "
 <tr id='sourceHeader'>
-<th name='togS'><a href='#'>+/-</a></th>
+<th name='togS'><a href='#'><font color='E1D7B0'>+/-</font></a></th>
 <th>Links</th>
 ";
   //
@@ -312,10 +312,10 @@ function processSourceTableRowHTML( $rtype, $id, $privateData, $data )
 <input type='checkbox' id='ds_$id' name='dsc[]' value='$id' onclick='check_toggle( \"$id\" );'>
 </td>
 <td>
-<a href='http://simbad.harvard.edu/simbad/sim-id?Ident=$simbadurl' title='simbad identifier search on $simbad' target='_blank'> s </a>
-<a href='http://heasarc.gsfc.nasa.gov/cgi-bin/vo/datascope/jds.pl?position=$simbadurl&amp;size=0.05&amp;errorcircle=-1.0' title='NVO Datascope query on $simbad ( using size=0.05 )' target='_blank'> d </a>
-<a href='http://xmm.esac.esa.int/BiRD/cgi-bin/rgs_log.py?object=$simbadurl&amp;simbad_name=1' title='Search BiRD(XMM) for $simbad' target='_blank'> b </a>
-<a onMouseOver='iTip( $id )' href='surveypng/tgSid_${id}_survey_panel.png' target='_blank'>i</a>
+<button> <a href='http://simbad.harvard.edu/simbad/sim-id?Ident=$simbadurl' title='simbad identifier search on $simbad' target='_blank'> s </a> </button>
+<button> <a href='http://heasarc.gsfc.nasa.gov/cgi-bin/vo/datascope/jds.pl?position=$simbadurl&amp;size=0.05&amp;errorcircle=-1.0' title='NVO Datascope query on $simbad ( using size=0.05 )' target='_blank'> d </a> </button>
+<button> <a href='http://xmm.esac.esa.int/BiRD/cgi-bin/rgs_log.py?object=$simbadurl&amp;simbad_name=1' title='Search BiRD(XMM) for $simbad' target='_blank'> b </a> </button>
+<button> <a onMouseOver='iTip( $id )' href='surveypng/tgSid_${id}_survey_panel.png' target='_blank'>i</a> </button>
 </td>
 ";
       foreach ( array_keys( $data ) as $column ){

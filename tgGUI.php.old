@@ -1,0 +1,212 @@
+<?php
+##############################################################################
+##
+## TGCAT WEBPAGE DOCUMENT
+##
+## TITLE: PlotCBar.php 
+##
+## DESCRIPTION:
+##
+##      this script creates the GUI portion of the plotting
+##      interface for TGCat and should be included in the plotting
+##      page using a php include. The entire form is contained
+##      herein and the sumbit button sends POST data to the 
+##      "do_plot.php" script to be plotted.
+##
+## REVISION:
+##
+##     -v 1.0 Arik Mitschang 
+##
+##############################################################################
+#########################################
+# 
+# This is the plot customization bar for the
+# TGCat plotting tool
+#
+# Should contain:
+#    x limits
+#    y limits
+#    binning
+#    
+#
+
+print "\n<script type='text/javascript' src='tg_plot.js'></script>\n";
+
+#-- make the div element --#
+//print "<div class=pcbar>\n";
+
+#-- initialize the form --#
+print "<form id='plt_opt' action='tgRunPlot.php?fr=$FILEROOT' target='custom_plot' method='POST'>\n";
+
+#-- make table of x/y-limits --#
+$i_size=4;
+
+?>
+
+<style type=text/css >
+  table.plot_table td {padding-right: 5px; padding-bottom:2px;}
+</style>
+
+<center>
+<br>
+<p>
+Plot Type:
+<select id=plotTypeSelect name=plot onchange='grayOutY();' >
+  <option value='Counts/X/s' title='counts/sec/X unit' onchange='grayOutY();'> Counts/&chi;/s </option>
+  <option                    title='counts/bin'        onchange='grayOutY();'> Counts/Bin     </option>
+
+<?php 
+
+if ( $DETECTOR != "HRC" ) 
+  {
+    print"
+  <option value=Fgam  title='photons/area/sec'        onchange='grayOutY();'>F&gamma;       </option>
+  <option value=FgamX title='photons/area/sec/X unit' onchange='grayOutY();'>F&gamma;/&chi; </option>
+  <option value=Fx    title='Energy/area/sec/X unit'  onchange='grayOutY();'>F&chi;         </option>
+  <option value=XFx   title='Energy/area/sec'         onchange='grayOutY();'>&Chi;F&chi;    </option>
+";
+  }
+?>
+</select>
+
+X-Units:
+<select name=xunit>
+  <option> keV</option>
+  <option> A</option>
+  <option> nm</option>
+  <option> micron</option>
+  <option> mm</option>
+  <option> cm</option>
+  <option> m</option>
+  <hr>
+  <option> eV</option>
+  <option> MeV</option>
+  <option> GeV</option>
+  <option> TeV</option>
+  <option> Hz</option>
+  <option> kHz</option>
+  <option> MHz</option>
+  <option> GHz</option>
+</select>
+
+Y-Scale:
+<select name=yunit id=yscale >
+  <option> Photons</option>
+<?php
+if ( $DETECTOR != "HRC" )
+  {
+    print"
+  <option> ergs</option>
+  <option> Watts</option>
+  <option> mJy</option>
+";
+  }
+?>
+</select>
+</p>
+
+<p>
+<input name=xlog type=checkbox checked> XLog
+<input name=ylog type=checkbox checked> YLog
+<input name=errbar type=checkbox checked>ErrorBars
+</p>
+
+<p>
+<?php
+if ( $GRATING == "HETG" ){
+print "
+MEG Orders:
+<input type=checkbox name=MEG+1 checked> +1
+<input type=checkbox name=MEG-1 checked> -1 
+HEG Orders:
+<input type=checkbox name=HEG+1 >+1 
+<input type=checkbox name=HEG-1 >-1
+";
+ }
+elseif ( $GRATING == "LETG" ) {
+print "
+LEG Orders:
+<input type=checkbox name=LEG+1 checked> +1
+<input type=checkbox name=LEG-1 checked> -1
+";
+}
+?>
+<input type='checkbox' name='combine' title='combine selected datasets' checked >Combine
+</p>
+
+<p>
+<table class=plt_arrows style='display:inline'><tr>
+<td>Xmin:</td>
+<td><input type=text id=xmin name=xmin size=4></td> 
+<td id=xmina></td> 
+</tr>
+</table>
+<table class=plt_arrows style='display:inline'><tr>
+<td>Xmax:</td>
+<td> 
+<input type=text id=xmax name=xmax size=4></td> 
+<td id=xmaxa></td> 
+</tr>
+</table>
+<table class=plt_arrows style='display:inline'><tr>
+<td>Ymin:</td>
+<td> 
+<input type=text id=ymin name=ymin size=4></td> 
+<td id=ymina></td> 
+</tr>
+</table>
+<table class=plt_arrows style='display:inline'><tr>
+<td>Ymax:</td>
+<td> 
+<input type=text id=ymax name=ymax size=4></td> 
+<td id=ymaxa></td> 
+</tr>
+</table>
+</p>
+
+<p>
+<input type=checkbox name=bin checked>
+Bin
+min-S/N: <input type=text name=bin1 size=4 value='2'>
+min-Ch: <input type=text name=bin2 size=4 value='4'>
+</p>
+
+<?php
+print "<input type=hidden name=id value=$id>\n";
+print "<input type=hidden name=grating value=$GRATING>\n";
+print "<input type=hidden name=detector value=$DETECTOR>\n";
+print "<input type=hidden name=doplot value=1>\n";
+?>
+
+<br>
+Save<input type=checkbox name=save>
+<input type=Submit value=replot width=50>
+<input type=Reset value=reset width=20>
+
+</center>
+</form>
+
+<br>
+
+<script type="text/javascript">
+insert_arrows();
+grayOutY();
+function grayOutY( )
+{
+  var Psel = document.getElementById("plotTypeSelect").options;
+  var openf=true;
+  if ( document.getElementById("plotTypeSelect").options[0].selected || document.getElementById("plotTypeSelect").options[1].selected )
+    {
+      openf=false;
+      document.getElementById("yscale").disabled=true;
+      document.getElementById("yscale").options[0].selected=true;      
+    }
+  else
+    {
+      document.getElementById("yscale").disabled=false;
+    }
+  /*alert( Psel + "\nSel 1 (cnt/X/s): " + Psel[0].selected + "\nSel 2 (cnt/bin): " + Psel[1].selected + "\nFinal verdict (true=enable): " + openf);*/
+}
+  
+
+</script>

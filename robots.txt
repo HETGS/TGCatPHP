@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /png
+Disallow: /tgGet.php
+Disallow: /tgData.php
+Disallow: /tgCli.php
+Disallow: /archive
+Disallow: /tmp

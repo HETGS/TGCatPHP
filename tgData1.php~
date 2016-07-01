@@ -58,7 +58,7 @@ $tableCode = $query->getTableCode();
 <script type="text/javascript" src="superMessage.js"></script>
 
 <?php
-print "<div id='page' style='padding-top:24px;'>\n";
+print "<div id='page' style='padding-top:12px;'>\n";
 print "<form name='dForm' action='tgData.php?t=AC' method='post' onsubmit='return submitForm(this)'>";
 $query->runQuery(); //displays the query results
 
@@ -131,6 +131,8 @@ finalizeMainMenu();
 print "</form>";
 
 print "<div style='position:fixed;top:30px;background:#ffffbb;color:#884400;padding-top:1px;width:100%;border:0px;border-bottom:1px solid #222222;text-align:center;font-size:24px;font-weight:bold;font-style:italic;opacity:0.85;filter:Alpha(opacity=85);'> ---- currently viewing " . getNiceTableNameFromCode( $tableCode ) . " table ---- </div>";
+
+print "<spacer>"
 
 $notify = $query->getNotifications();
 $notify = join( " ; ",$notify );

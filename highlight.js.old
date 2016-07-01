@@ -1,0 +1,139 @@
+var HIGHLIGHT_DOWN = 0;
+var HIGHLIGHT_ARRAY = new Array();
+var HIGHLIGHTER = 0;
+
+function load_highlight()
+{
+	var table = document.getElementById("dTable");
+	var data_rows = table.getElementsByTagName("tr");
+
+	for (i=0;i<data_rows.length;i++)
+	{	
+		var elem = data_rows[i];
+		/* alert( elem ); */
+		/* var id = elem.id; */
+		elem.onmousedown = highlight_down;
+		elem.onmouseup   = highlight_up;
+		elem.onmouseover = highlight_over;		
+	}
+	var field = table.getElementsByTagName("input");	
+	/* alert( field ); */
+	for (i = 0; i < field.length; i++ )
+	{
+		if ( field[i].checked == true ){
+			do_toggle( field[i].value );
+			do_toggle( field[i].value );
+		}
+	}	
+	
+}
+
+function highlight_down( event )
+{
+	/*alert( 'highlight down ' + e ); */
+        if ( event.which == null ){
+            button=event.button;
+        }
+        else { 
+            button=event.which;
+        }
+        if ( button != 1 ){ return true; }
+	var cell = event.target.parentNode;
+	/*alert( 'event parent node ' + cell );*/
+	cell.parentNode.onmouseup = highlight_up;
+	var id = cell.id.split("_")[1];
+	HIGHLIGHT_DOWN = 1;
+	/*alert( 'runing toggle check on id ' + id );*/
+	toggle_check( id );
+	return false;
+}
+
+function highlight_over( e )
+{
+	if ( HIGHLIGHT_DOWN == 1 )
+	{
+		var cell = e.target.parentNode;		
+		var id = cell.id.split("_")[1];
+		toggle_check( id );
+		HIGHLIGHTER = 1;
+	}
+	return false;
+}
+
+function highlight_up( e )
+{
+	HIGHLIGHT_DOWN = 0;
+	HIGHLIGHT_ARRAY = [];
+	HIGHLIGHTER = 0;
+	return false;
+}
+
+function toggle_check( dsid )
+{
+
+	if ( dsid == HIGHLIGHT_ARRAY[HIGHLIGHT_ARRAY.length-1] )
+	{
+		return false;
+	}	
+	else if ( dsid == HIGHLIGHT_ARRAY[HIGHLIGHT_ARRAY.length-2] )
+	{
+		this_id = HIGHLIGHT_ARRAY.pop();
+	}
+	else
+	{
+		this_id = dsid;
+		HIGHLIGHT_ARRAY.push( dsid );
+	}
+	/*alert( 'running check toggle on ' + dsid );*/
+	do_toggle( this_id );
+}
+
+function do_toggle( id )
+{
+	var checkbox = document.getElementById( "ds_"+id);
+	if ( checkbox.checked == false )
+	{ 
+		checkbox.checked = true;
+		var elem = document.getElementById( "tr_"+id );
+		/*alert( elem.className );*/
+		elem.className = elem.className + "_highlight";  
+		/*alert( elem.className );*/
+	}
+	else                            
+	{ 
+		checkbox.checked = false; 
+		var elem = document.getElementById( "tr_"+id );
+		/*alert( elem.className );*/
+		elem.className = elem.className.split("_")[0];		
+	}
+}
+
+function check_toggle( id )
+{
+	var checkbox = document.getElementById( "ds_"+id);
+	if ( checkbox.checked == true )
+	{ 
+		checkbox.checked = true;
+		var elem = document.getElementById( "tr_"+id );
+		elem.className = elem.className + "_highlight";  
+	}
+	else                            
+	{ 
+		checkbox.checked = false; 
+		var elem = document.getElementById( "tr_"+id );
+		elem.className = elem.className.split("_")[0];		
+	}
+
+}
+
+function check_all()
+{	
+	var table = document.getElementById("dTable");
+	var field = table.getElementsByTagName("input");
+	
+	/*alert( field );*/
+	for (i = 0; i < field.length; i++ )
+	{
+		do_toggle(field[i].value);
+	}	
+}

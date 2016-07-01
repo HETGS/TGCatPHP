@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# 2013.09.26 dph;  
+#    update - omit vguide links.  put under cvs for convenience
+#
+# make links for site
+#
+ln -s /cxc/data/tgcat/archive archive 
+ln -s help/not_included_obsids.html not_included_obsids.html 
+ln -s archive/png png
+ln -s archive/surveypng surveypng
+ln -s /tmp/tgcat tmp 
+
+if [ $# -gt 0 ] && [ $1 == "test" ]
+then 
+	ln -sf tgDatabaseConnect_TEST.php tgDatabaseConnect.php
+	pushd style
+	ln -sf default-dev.css default.css
+	popd
+else
+	ln -sf tgDatabaseConnect_PROD.php tgDatabaseConnect.php
+	pushd style
+	ln -sf default-prod.css default.css
+	popd
+#	ln -s ../dev/tgcat dev
+#	ln -s ../VGuide_0.5 VGuide
+#	ln -s ../VGuide_0.6 VGuide_dev
+fi
+

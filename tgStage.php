@@ -162,6 +162,7 @@ initMainMenu();
 generateFileMenu();
 generateHelpMenu();
 generateQuickSearchBar();
+generateHelpTopicsMenu();
 finalizeMainMenu();
 
 $s = "";

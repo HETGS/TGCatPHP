@@ -186,6 +186,7 @@ print "
 initMainMenu();
 generateFileMenu();
 generatePlotViewMenu( $id, $froot, $dr );
+generateHelpTopicsMenu();
 generateHelpMenu();
 //generateQuickSearchBar();
 finalizeMainMenu();

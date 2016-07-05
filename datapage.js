@@ -147,7 +147,7 @@ function submitForm(form) {
 }
 
 function fluxTip( id ){
-	Tip( 'Flux Spectrum - (Click For More Plots)<br><img src="png/tgcid_'+id+'_summary_flux_overview.png" height="200" width="350">', FADEIN,200,FADEOUT,200,DELAY,200,CLICKCLOSE,'true',BGCOLOR,'#FFFFFF',BORDERCOLOR,'#000000',FONTCOLOR,'#000000',ABOVE,'true' );
+	Tip( 'Flux Spectrum - <b>(Click Object For More Plots)</b><br><img src="png/tgcid_'+id+'_summary_flux_overview.png" height="200" width="350">', FADEIN,200,FADEOUT,200,DELAY,200,CLICKCLOSE,'true',BGCOLOR,'#FFFFFF',BORDERCOLOR,'#000000',FONTCOLOR,'#000000',ABOVE,'true' );
 }
 
 function vvTip( review, comment ){

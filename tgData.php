@@ -124,6 +124,7 @@ generateFileMenu();
 if ( $query->isValid() ){
   generateDataViewMenu( $qid, $tableCode, $cols );
   generateDataActionMenu( $tableCode );
+  generateHelpTopicsMenu();
  }
 generateHelpMenu();
 //generateQuickSearchBar();

@@ -234,7 +234,7 @@ function processObsidTableRowHTML( $rtype, $id, $obsid, $simbad, $srcid, $review
 <input type='checkbox' id='ds_$id' name='dsc[]' value='$id' onclick='check_toggle( \"$id\" );'>
 </td>
 <td>
-  <button> <a href='http://asc.harvard.edu/cgi-gen/target_param.cgi?$obsid' target='_blank' title='obscat page'> o </a> </button>
+  <button> <a href='http://cda.harvard.edu/chaser/startViewer.do?menuItem=details&obsid=$obsid' target='_blank' title='obscat page'> o </a> </button>
   <button> <a href='http://cxc.harvard.edu/cgi-gen/cda/bib.pl?ADS=search&amp;obsid=$obsid' target='_blank' title='publications'> p </a> </button>
   <button> <a href='tgPlot.php?t=V&amp;i=$id&amp;q=$_REQUEST[q]' onmouseover=$VVtip title='VV report' target='_blank'> v </a> </button> 
   <button> <a href='http://simbad.harvard.edu/simbad/sim-id?Ident=$simbadurl' title='simbad identifier search on $simbad' target='_blank'> s </a> </button> 

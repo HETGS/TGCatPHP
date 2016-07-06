@@ -72,6 +72,7 @@ initMainMenu();
 generateFileMenu();
 generateHelpMenu();
 generateQuickSearchBar();
+generateHelpTopicsMenu();
 finalizeMainMenu();
 
 statusMessage( "search the database for sources or extractions" );

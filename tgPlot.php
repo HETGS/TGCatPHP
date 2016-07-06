@@ -148,10 +148,10 @@ foreach ( array_keys( $info ) as $key ){
   default:
     if ( is_numeric( $info[$key] ) && preg_match( '/\./',$info[$key] ) ){
       print "<!-- is numeric -->";
-      $displayF = sprintf( '%.5e',$info[$key] );
+      $displayF = sprintf( '%.3f',$info[$key] );
     }
     if ( $key == "ra" || $key == "decl" ){
-      $displayF = sprintf( '%.3f',$info[$key] );
+      $displayF = sprintf( '%.5f',$info[$key] );
     }
   }
 

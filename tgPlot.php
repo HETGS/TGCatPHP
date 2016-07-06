@@ -154,7 +154,14 @@ foreach ( array_keys( $info ) as $key ){
       $displayF = sprintf( '%.3f',$info[$key] );
     }
   }
-  print "<tr><th> $key </th><td> $displayF </td></tr>\n";
+
+  if ( $key == 'obsid'){
+    print "<tr><th> $key </th><td> <a href='http://cda.harvard.edu/chaser/startViewer.do?menuItem=details&obsid=$displayF' target='_blank'> $displayF </a> </td></tr>\n";
+  } elseif ($key == 'simbad_ID') {
+    print "<tr><th> $key </th><td> <a href='http://simbad.harvard.edu/simbad/sim-id?Ident=$displayF' target='_blank'> $displayF </a> </td></tr>\n";
+  } else{
+    print "<tr><th> $key </th><td> $displayF </td></tr>\n";
+  }
 }
 
 $usesaved=$_GET['usesaved'];

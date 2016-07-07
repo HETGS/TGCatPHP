@@ -13,12 +13,12 @@
 require "tgDatabaseConnect.php";
 
 $qcat = mysql_query( "select t.category,count(distinct(object)) from source as s left join src2type as st using( srcid ) left join type as t using( typeid ) where t.category is not null and s.reject='N' group by t.category order by t.category asc" );
-$max_str_len = 22;
+$max_str_len = 30;
 $mycontent_type =  "<tr>";
 $tdcount = 1;
 while ( $row = mysql_fetch_array($qcat) )
   {   
-    $mycontent_type .= "<td>$row[0] ( $row[1] )<br><select name=types[] multiple size=6>\n";
+    $mycontent_type .= "<td>$row[0] ( $row[1] )<br><select name=types[] multiple size=6 style='width:180px'>\n";
     $qtypes = mysql_query( "select t.type,t.description,count(distinct(s.object)) from source as s left join src2type as st using( srcid ) left join type as t using( typeid ) where t.category='$row[0]' and s.reject='N' group by t.type order by t.description asc" );
     while ( $row = mysql_fetch_array($qtypes) )
       { 

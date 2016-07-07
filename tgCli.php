@@ -51,7 +51,7 @@ if ( $qid ){
 }
 else if ( $name ){
   if ( ! $tab ){ $tab = 's'; }
-  $q->initNewQuery( "NAME$typeExt", $tab, tgcatNameSearch( $name ), $cols );
+  $q->initNewQuery( "NAME$typeExt", $tab, tgcatNameSearch( $name ), $cols);
 }   
 else if ( is_numeric($ra) && is_numeric($dec) && is_numeric($sr) ){
   if ( ! $srunit ){ $srunit = "degrees"; }
@@ -74,7 +74,7 @@ else if ( $tgid || $srcid ){
   }
   if ( ! $tab ){ $tab = 'o'; }
   if ( $xids ){
-    $q->initNewQuery( "${xtype}$typeExt", $tab, "$idname in ( $xids )", $cols );
+    $q->initNewQuery( "${xtype}$typeExt", $tab, "$idname in ( $xids )", $cols);
   }
 }
 else {

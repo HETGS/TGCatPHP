@@ -1,0 +1,75 @@
+<h1> Spectral Properties Search </h1>
+<input type='hidden' name='queryType' value='SPECPROP'>
+<div class='search'>
+
+<?php
+$spsz = 15;
+$atoms = "heg_band,meg_band,letgs_band,letg_acis_band,Fe25,FeK,Ca19,Ar18,Ar17,S16,S15,Si14,Si13,Mg12,Mg11,Fe2x,Ne10,Ne9,Fe17,O8,O7,N7,zeroth_order,csc_h,csc_m,csc_s,csc_u,csc_b";
+$atoms_op = join( "<option>",split( ",",$atoms ) );
+?>
+
+<p>
+       During processing <i>TGCat</i> Obsids, there are a number of spectral properties extracted
+       from the resulting products and tabulated for reference. This search allows a database
+       query based on some of these properties. It may be beneficial in forming a search to
+       reference the spectral properties trends table for all <i>TGCat</i> observations 
+       <a href='tgTrend.php?type=SPECPROP' target=_blank>here</a>.<br>
+       &nbsp;&nbsp;Particular regions with typical lines are also extracted
+       automatically and indexed by atom. A description of these
+       regions can be found <a href='#'>here</a>
+</p>
+
+
+<?php
+
+print "
+       <table>
+       <tr>
+       <td>
+       atom
+       </td>
+       <td> <i> min </i> </td>
+       <td> <i> max </i> </td>
+       </tr>
+       <tr>
+       <td><select name=atom[] ><option> $atoms_op </select>
+       </td>
+       <td><input type=text name=min_atom[] size=$spsz></td>
+       <td><input type=text name=max_atom[] size=$spsz></td>
+       <td> <select name=atom_scale[] >
+              <option> count_rate 
+              <option> photon_flux
+              <option> energy_flux
+            </select>
+       </td>             
+       <tr>
+       <tr>
+       <td><select name=atom[] ><option> $atoms_op </select>
+       </td>
+       <td><input type=text name=min_atom[] size=$spsz></td>
+       <td><input type=text name=max_atom[] size=$spsz></td>
+       <td> <select name=atom_scale[] >
+              <option> count_rate 
+              <option> photon_flux
+              <option> energy_flux
+            </select>
+       </td>             
+       <tr>
+       <tr>
+       <td><select name=atom[] ><option> $atoms_op </select>
+       </td>
+       <td><input type=text name=min_atom[] size=$spsz></td>
+       <td><input type=text name=max_atom[] size=$spsz></td>
+       <td> <select name=atom_scale[] >
+              <option> count_rate 
+              <option> photon_flux
+              <option> energy_flux
+            </select>
+       </td>             
+       <tr>
+       </table>
+";
+
+?>
+
+</div>

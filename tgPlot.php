@@ -148,13 +148,22 @@ foreach ( array_keys( $info ) as $key ){
   default:
     if ( is_numeric( $info[$key] ) && preg_match( '/\./',$info[$key] ) ){
       print "<!-- is numeric -->";
-      $displayF = sprintf( '%.5e',$info[$key] );
-    }
-    if ( $key == "ra" || $key == "decl" ){
       $displayF = sprintf( '%.3f',$info[$key] );
     }
+    if ( $key == "ra" || $key == "decl" ){
+      $displayF = sprintf( '%.5f',$info[$key] );
+    }
   }
-  print "<tr><th> $key </th><td> $displayF </td></tr>\n";
+
+  if ( $key == 'obsid'){
+    print "<tr><th> $key </th><td> <a href='http://cda.harvard.edu/chaser/startViewer.do?menuItem=details&obsid=$displayF' target='_blank'> $displayF </a> </td></tr>\n";
+  } elseif ($key == 'simbad_ID') {
+    print "<tr><th> $key </th><td> <a href='http://simbad.harvard.edu/simbad/sim-id?Ident=$displayF' target='_blank'> $displayF </a> </td></tr>\n";
+  } elseif($key == 'review'){
+    print "<tr><th> $key </th><td> <a href='tgPrev.php?i=".$id."&amp;m=V' target='imageWin'> $displayF </a> </td></tr>\n";
+  } else{
+    print "<tr><th> $key </th><td> $displayF </td></tr>\n";
+  }
 }
 
 $usesaved=$_GET['usesaved'];
@@ -186,6 +195,7 @@ print "
 initMainMenu();
 generateFileMenu();
 generatePlotViewMenu( $id, $froot, $dr );
+generateHelpTopicsMenu();
 generateHelpMenu();
 //generateQuickSearchBar();
 finalizeMainMenu();

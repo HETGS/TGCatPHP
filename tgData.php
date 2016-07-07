@@ -124,6 +124,7 @@ generateFileMenu();
 if ( $query->isValid() ){
   generateDataViewMenu( $qid, $tableCode, $cols );
   generateDataActionMenu( $tableCode );
+  generateHelpTopicsMenu();
  }
 generateHelpMenu();
 //generateQuickSearchBar();
@@ -171,7 +172,7 @@ if ( $_REQUEST['n'] == "DQ" ){
   $pkgid = $_REQUEST['p'];
   $msg = "Your download request has been submitted! Downloads are processed in the order received, An email will be sent to you when packaging is completed indicating the location at which it can be obtained. For your reference your package ID is $pkgid<br>Thank you";
   superMessage( $msg );
-  $notify .= "; <img src='image/snotify.gif'> package queued, your pkgid is $pkgid <img src='image/snotify.gif'> <a href='tgData.php?q=$qid'>okay I get it</a>";
+  $notify .= "; <img src='image/snotify.gif'> package queued, your pkgid is $pkgid <img src='image/snotify.gif'> <a href='tgStage.php' style='color:#00FFFF'>Go to Download Area</a>";
 }
 if ( $_REQUEST['n'] == "T" ){
   $msg = "Query tagged";
